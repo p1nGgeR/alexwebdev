@@ -1,0 +1,339 @@
+---
+title: "PHP+Telegram: 5 easy ways how to send a message"
+excerpt: In the world of online communication, Telegram stands out as a popular messaging platform. If you're a developer, it might be useful to know how to easily send a message to Telegram from the code. This article will show you 5 easy ways to do it using PHP.
+published_at: 2023-08-22
+image: '/images/php-telegram-5-easy-ways-how-to-send-a-message-c.png'
+seo_title: "PHP+Telegram: 5 easy ways how to send a message"
+seo_description: It might be useful to know how to easily send a message to Telegram from the code. This article will show you 5 easy ways to do it using PHP.
+h1: "PHP+Telegram: 5 easy ways how to send a message"
+h2: null
+category: php
+tags:
+  - slug: php
+    name: php
+  - slug: telegram
+    name: telegram
+  - slug: symfony
+    name: symfony
+  - slug: laravel
+    name: laravel
+---
+
+In the world of online communication, Telegram stands out as a popular messaging platform. If you're a developer, it might be useful to know how to easily send a message to Telegram from the code. This article will show you 5 easy ways to do it using PHP.
+
+---
+
+## Preconditions:
+
+- PHP installed and curl extension enabled
+- Public Telegram channel created
+- Telegram bot created using BotFather
+- Bot added to channel administrators
+
+---
+
+## Telegram API
+
+Telegram provides a variety of API endpoints and methods, which can be found in the [documentation](https://core.telegram.org/methods).
+
+Today we're gonna focus on the [sendMessage](https://core.telegram.org/method/messages.sendMessage) endpoint. It sends some text **{TEXT}** to the particular channel **{CHANNEL_ID}** by the bot **{BOT_API_TOKEN}**
+
+```bash
+https://api.telegram.org/bot{BOT_API_TOKEN}/sendMessage?chat_id={CHANNEL_ID}&text={TEXT}
+```
+
+There are a lot of ways to call this endpoint and send a message to the channel inside a PHP project. We will cover 5 of them.
+
+---
+
+## HTTP request with cURL
+### Functional style
+
+```php
+<?php
+
+$botApiToken = 'your bot api token';
+$channelId ='your channel id';
+$text = 'Hello, I am from PHP!';
+
+$query = http_build_query([
+    'chat_id' => $channelId,
+    'text' => $text,
+]);
+$url = "https://api.telegram.org/bot{$botApiToken}/sendMessage?{$query}";
+
+$curl = curl_init();
+curl_setopt_array($curl, array(
+    CURLOPT_URL => $url,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_CUSTOMREQUEST => 'GET',
+));
+curl_exec($curl);
+curl_close($curl);
+```
+
+### OOP style
+
+#### Installation
+
+```bash
+composer require curl/curl
+```
+
+#### Usage
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$botApiToken = 'your bot api token';
+$channelId ='your channel id';
+$text = 'Hello, I am from PHP!';
+
+$query = http_build_query([
+    'chat_id' => $channelId,
+    'text' => $text,
+]);
+$url = "https://api.telegram.org/bot{$botApiToken}/sendMessage?{$query}";
+
+$curl = new \Curl\Curl();
+$curl->get($url);
+```
+
+---
+
+## One line magic using file_get_contents
+
+```php
+<?php
+
+$botApiToken = 'your bot api token';
+$channelId = 'your channel id';
+$text = 'Hello, I am from PHP file_get_contents!';
+$query = http_build_query([
+    'chat_id' => $channelId,
+    'text' => $text,
+]);
+$url = "https://api.telegram.org/bot{$botApiToken}/sendMessage?{$query}";
+file_get_contents($url);
+```
+
+---
+
+## Symfony HTTP client
+[Symfony](https://symfony.com) is one of the most popular PHP frameworks. It provides a lot of different components out of the box and one of them is [HTTP Client](https://symfony.com/doc/current/http_client.html). It allows you to make HTTP requests easily.
+
+### Installation
+
+```bash
+composer require symfony/http-client
+```
+
+### Standalone
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+use Symfony\Component\HttpClient\HttpClient;
+
+$botApiToken = 'your bot api token';
+$channelId ='your channel id';
+$text = 'Hello, I am from Symfony HTTP Client!';
+
+$client = HttpClient::create([
+    'base_uri' => 'https://api.telegram.org',
+]);
+
+$client->request('GET', "/bot{$botApiToken}/sendMessage", [
+    'query' => [
+        'chat_id' => $channelId,
+        'text' => $text,
+    ],
+]);
+```
+
+### Inside Symfony app
+
+Prepare scoped client inside **config/packages/framework.yaml**
+
+```yaml
+framework:
+    http_client:
+        scoped_clients:
+            telegram.client:
+                base_uri: 'https://api.telegram.org'
+```
+
+And use it inside your service
+
+```php
+<?php
+
+namespace App;
+
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+
+class YourService
+{
+    public function __construct(
+        private readonly HttpClientInterface $telegramClient,
+    )
+    {
+    }
+
+    public function sendMessage(string $text): void
+    {
+        $botApiToken = 'your bot api token';
+        $channelId ='your channel id';
+
+        $this->telegramClient->request('GET', "/bot{$botApiToken}/sendMessage", [
+            'query' => [
+                'chat_id' => $channelId,
+                'text' => $text,
+            ],
+        ]);
+    }
+}
+```
+
+---
+
+## Symfony Telegram Notifier
+
+Another Symfony component that can send a message to the Telegram channel is [Telegram Notifier](https://symfony.com/doc/6.1/notifier/telegram.html).
+
+### Installation
+
+```bash
+composer require symfony/telegram-notifier
+```
+
+### Standalone
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+use Symfony\Component\Notifier\Bridge\Telegram\TelegramTransport;
+use Symfony\Component\Notifier\Chatter;
+use Symfony\Component\Notifier\Message\ChatMessage;
+
+$botApiToken = 'your bot api token';
+$channelId ='your channel id';
+
+$text = 'Hello, I am from Symfony Telegram Notifier!';
+
+$telegramTransport = new TelegramTransport($botApiToken, $channelId);
+$chatter = new Chatter($telegramTransport);
+$chatMessage = new ChatMessage($text);
+$chatter->send($chatMessage);
+```
+
+### Inside Symfony app
+
+Configure notifier chatter transport inside **config/packages/framework.yaml**
+
+```yaml
+parameters:
+  env(TELEGRAM_DSN): 'telegram://BOT_API_TOKEN@default?channel=CHANNEL_ID'
+
+framework:
+    notifier:
+        chatter_transports:
+            telegram: '%env(TELEGRAM_DSN)%'
+```
+
+And use it inside your service
+
+```php
+<?php
+
+namespace App;
+
+use Symfony\Component\Notifier\ChatterInterface;
+use Symfony\Component\Notifier\Message\ChatMessage;
+
+class YourService
+{
+    public function __construct(
+        private readonly ChatterInterface $telegramChatter
+    )
+    {
+    }
+
+    public function sendMessage(string $text): void
+    {
+        $this->telegramChatter->send(new ChatMessage($text));
+    }
+}
+```
+
+---
+
+## Telegram Bot SDK
+
+[Telegram Bot SDK](https://telegram-bot-sdk.com) lets you develop Telegram Bots in PHP easily! Supports Laravel framework and comes with addons to enhance your bot development experience.
+
+### Installation
+
+```bash
+composer require irazasyed/telegram-bot-sdk
+```
+
+### Standalone
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+use Telegram\Bot\Api;
+
+$botApiToken = 'your bot api token';
+$channelId ='your channel id';
+
+$telegram = new Api($botApiToken);
+$telegram->sendMessage([
+    'chat_id' => $channelId,
+    'text' => $text,
+]);
+```
+
+### Inside Laravel app
+
+```bash
+php artisan vendor:publish --tag="telegram-config"
+```
+
+```php filename="index"
+<?php
+
+namespace App;
+
+use Telegram\Bot\Api;
+
+class YourService
+{
+    public function __construct(private readonly Api $telegram)
+    {
+    }
+
+    public function sendMessage(string $channelId, string $text): void
+    {
+        $this->telegram->sendMessage([
+            'chat_id' => $channelId,
+            'text' => $text,
+        ]);
+    }
+}
+```
+
+---
+
+## Summary
+
+There are many ways to achieve the same goal. With so many options available, there's no definitive "right" way to send a Telegram message using PHP. The choice you make depends on your needs and the technologies you're working with. This article shows five simple ways to send messages to Telegram using PHP, in fact there are many more than five and it's up to you which one to use.

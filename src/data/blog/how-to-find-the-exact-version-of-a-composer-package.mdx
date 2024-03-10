@@ -1,0 +1,153 @@
+---
+title: How to find the exact version of a composer package?
+excerpt: Sometimes you may need to know the versions of installed composer libraries, this article will show you how to do that
+published_at: 2023-09-03
+image: '/images/how-to-find-the-exact-version-of-a-composer-package-c.png'
+seo_title: How to find the exact version of a composer package?
+seo_description: Sometimes you may need to know the versions of installed composer libraries, this article will show you how to do that
+h1: How to find the exact version of a composer package?
+h2: null
+category: php
+tags:
+  - slug: php
+    name: php
+  - slug: composer
+    name: composer
+---
+
+[Composer](https://getcomposer.org/) is a tool for dependency management in PHP. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you. Sometimes you may need to know the versions of installed libraries, this article will show you how to do that.
+
+## Check if composer installed
+
+The first thing you'll need to do is to check if composer is installed. You can do this by running any composer command., for example **--version**.
+
+```bash
+composer --version
+
+# output
+Composer version 2.2.4 2022-01-08 12:30:42
+```
+
+If composer commands do not work, you will need install it first: [Download composer](https://getcomposer.org/download/).
+
+## Check the versions of all installed packages
+
+You can check which packages are installed in the working directory by running one of the following commands - **show** or **info**:
+
+```bash
+composer show
+
+# or
+
+composer info
+```
+
+It will show you package names, versions and descriptions
+
+
+```
+curl/curl                         2.5.0    cURL class for PHP
+symfony/http-client               v6.3.2   Provides powerful methods to fetch HTTP resources synchronously or asynchronously
+symfony/http-foundation           v6.3.4   Defines an object-oriented layer for the HTTP specification
+symfony/yaml                      v6.3.3   Loads and dumps YAML files
+```
+
+## Check versions of globally installed packages
+
+Sometimes you may need to check which packages are installed globally in the system. The **show** command should be run with the **global** keyword:
+
+```bash
+composer global show
+```
+
+And you will see a list similar to the previous one, but containing only globally installed packages
+
+```
+curl/curl 2.5.0 cURL class for PHP
+```
+
+## Check the version of a specific package
+
+For example, if you need to check what version of **symfony/http-foundation** is installed, you can do this as follows:
+
+```bash
+composer show symfony/http-foundation
+```
+
+It will give you a lot of information about the package: name, description, version, requirements, conflicting packages and much more:
+
+```plaintext
+name     : symfony/http-foundation
+descrip. : Defines an object-oriented layer for the HTTP specification
+keywords :
+versions : * v6.3.4
+type     : library
+...
+requires
+php >=8.1
+symfony/deprecation-contracts ^2.5|^3
+symfony/polyfill-mbstring ~1.1
+symfony/polyfill-php83 ^1.27
+...
+conflicts
+symfony/cache <6.2
+```
+
+If this amount of information is redundant, you can grep the versions only:
+
+```bash
+composer show symfony/http-foundation | grep versions
+
+# output
+versions : * v6.3.4
+```
+
+The same results can be achieved using **info** command
+
+```bash
+composer info symfony/http-foundation | grep versions
+
+# output
+versions : * v6.3.4
+```
+
+## Check the package versions from a specific author/vendor
+
+If you want to check the package version from a specific author/vendor, for example check the versions of installed [Symfony](https://symfony.com) components, you can pass a package mask using wildcards:
+
+```bash
+composer show "symfony/*"
+```
+
+It will only show packages that start with **symfony/**
+
+```plaintext
+symfony/http-client               v6.3.2   Provides powerful methods to fetch HTTP resources synchronously or asynchronously
+symfony/http-foundation           v6.3.4   Defines an object-oriented layer for the HTTP specification
+symfony/yaml                      v6.3.3   Loads and dumps YAML files
+```
+
+## Bonus: composer why/depends
+
+The **composer show** command shows the list of all installed packages, and you may find some unknown names in this list, e.g. libraries you didn't install, but which are present in your application. If you are curious how this happened, you can run the **why** or **depends** command:
+
+```bash
+composer why symfony/service-contracts
+
+# or
+
+composer depends symfony/service-contract
+```
+
+It tells you which other packages depend on a particular one and why it was installed even though it was not required directly:
+
+```plaintext
+symfony/http-client  v6.3.2  requires   symfony/service-contracts (^2.5|^3)
+symfony/translation  v6.3.3  conflicts  symfony/service-contracts (<2.5)
+```
+
+## Summary
+
+Composer helps you manage your dependencies, as well as keep track of what version of certain packages are installed. The **composer show** or **composer info** commands can be used to find out the exact version of a composer package.
+
+The **composer why** or **composer depends** commands are also useful to check why a particular package is installed or what other packages need it and in what version.
