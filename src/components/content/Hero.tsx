@@ -1,11 +1,11 @@
 import { cn } from "@/utils";
-import Heading from "@/components/Heading";
-import ButtonLink from "@/components/ButtonLink";
-import Container from "@/components/Container";
+import Heading from "@/components/ui/Heading";
+import ButtonLink from "@/components/ui/ButtonLink";
+import Container from "@/components/ui/Container";
 import SlideUp from "@/components/motion/SlideUp";
 import SlideDown from "@/components/motion/SlideDown";
 import { AUTHOR, JOB_TITLES } from "@/data/resume";
-import TypedText from "@/components/TypedText";
+import TypedText from "@/components/ui/TypedText";
 
 export default function Hero() {
   return (

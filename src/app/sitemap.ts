@@ -18,18 +18,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
     },
     {
-      url: absoluteUrl("/experience"),
-      lastModified: new Date(),
-    },
-    {
-      url: absoluteUrl("/education"),
-      lastModified: new Date(),
-    },
-    {
-      url: absoluteUrl("/skills"),
-      lastModified: new Date(),
-    },
-    {
       url: absoluteUrl("/blog"),
       lastModified: new Date(),
     },

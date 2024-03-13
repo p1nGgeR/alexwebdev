@@ -1,11 +1,13 @@
-import Heading from "@/components/Heading";
+import Heading from "@/components/ui/Heading";
 import { JobContent } from "@/ts/models/resume/fact";
 import { experience } from "@/data/resume";
-import Timeline, { TimelineItem } from "@/components/Timeline";
-import SectionTitle, { SectionTitleProps } from "@/components/SectionTitle";
-import Section from "@/components/Section";
-import Card from "@/components/Card";
+import Timeline, { TimelineItem } from "@/components/ui/Timeline";
+import SectionTitle, { SectionTitleProps } from "@/components/ui/SectionTitle";
+import Section from "@/components/ui/Section";
+import Card from "@/components/ui/Card";
 import SlideUp from "@/components/motion/SlideUp";
+
+export const EXPERIENCE_SECTION_ID = "experience";
 
 export default function Experience({
   firstTitle,
@@ -20,7 +22,7 @@ export default function Experience({
   });
 
   return (
-    <Section>
+    <Section id={EXPERIENCE_SECTION_ID}>
       <SectionTitle firstTitle={firstTitle} secondTitle={secondTitle} />
 
       <Card className={"md:py-16"}>

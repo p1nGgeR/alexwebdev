@@ -1,5 +1,5 @@
 "use client";
-import React, { ElementType } from "react";
+import { ElementType, forwardRef } from "react";
 import {
   domAnimation,
   LazyMotion,
@@ -19,7 +19,7 @@ export default function Motion({
   }
 
   // eslint-disable-next-line react/display-name
-  const Component = React.forwardRef((props, ref) => (
+  const Component = forwardRef((props, ref) => (
     <AsComponent ref={ref} {...props} />
   ));
   const MotionComponent = m(Component);

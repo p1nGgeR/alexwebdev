@@ -1,7 +1,7 @@
-import Section from "@/components/Section";
+import Section from "@/components/ui/Section";
 import PostCard from "@/components/blog/PostCard";
 import { Post } from "@/ts/models/blog/post";
-import SectionTitle, { SectionTitleProps } from "@/components/SectionTitle";
+import SectionTitle, { SectionTitleProps } from "@/components/ui/SectionTitle";
 import SlideUp from "@/components/motion/SlideUp";
 
 export default function BlogList({

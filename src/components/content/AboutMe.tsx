@@ -1,32 +1,35 @@
-import Section from "@/components/Section";
+import Section from "@/components/ui/Section";
 import Image from "next/image";
 import { cn } from "@/utils";
-import Heading from "@/components/Heading";
-import AbsoluteLink from "@/components/AbsoluteLink";
+import Heading from "@/components/ui/Heading";
 import SlideRight from "@/components/motion/SlideRight";
-import Motion from "@/components/motion/Motion";
 import { AUTHOR } from "@/data/resume";
 import SlideLeft from "@/components/motion/SlideLeft";
+import Link from "next/link";
+import { EXPERIENCE_SECTION_ID } from "@/components/content/Experience";
+import { SKILLS_SECTION_ID } from "@/components/content/Skills";
+import { EDUCATION_SECTION_ID } from "@/components/content/Education";
 
 export default function AboutMe() {
   return (
     <Section
-      className={"flex flex-col gap-8 md:gap-16 md:flex-row-reverse space-y-0"}
+      className={"grid md:grid-cols-[2fr,1fr] gap-8 md:gap-16 space-y-0"}
     >
       <SlideLeft
-        as={Image}
-        src={"/images/me.png"}
         className={cn(
-          "md:w-80 h-80",
-          "border border-secondary",
-          "rounded-3xl",
-          "object-cover object-center",
+          "row-start-1 md:col-start-2 md:row-end-3 max-w-sm",
+          "aspect-square overflow-hidden",
         )}
-        width={400}
-        height={400}
-        alt={AUTHOR}
-        loading={"eager"}
-      />
+      >
+        <Image
+          src={"/images/me.png"}
+          className={cn("border-2 border-secondary rounded-3xl")}
+          width={400}
+          height={400}
+          alt={AUTHOR}
+          priority={true}
+        />
+      </SlideLeft>
 
       <SlideRight
         className={cn(
@@ -43,22 +46,30 @@ export default function AboutMe() {
         <p>
           I`ve been working as a full-stack web developer since 2016. My main
           speciality is back-end development and I`ve got plenty of front-end
-          experience as well. Throughout my career I have released numerous
-          projects of varying complexity, converted hundreds of business
-          requirements into technical solutions, reviewed thousands of pull
-          requests and conducted dozens of interviews.
+          experience as well.
         </p>
 
         <p>
-          Find out more about my previous
-          <AbsoluteLink href={"/experience"} className={"mx-1"}>
-            work experience
-          </AbsoluteLink>
-          and
-          <AbsoluteLink href={"/skills"} className={"mx-1"}>
-            the technologies
-          </AbsoluteLink>
-          I have experience with.
+          Throughout my career I have released numerous projects of varying
+          complexity, converted hundreds of business requirements into technical
+          solutions, reviewed thousands of pull requests and conducted dozens of
+          interviews.
+        </p>
+
+        <p>
+          Besides coding, I find joy in helping others to improve their skills,
+          making the learning journey smoother for everyone on the team.
+        </p>
+
+        <p>
+          I`m excited to continue leveraging and improving my skills to
+          contribute to innovative and impactful projects.
+        </p>
+
+        <p className={"space-x-4"}>
+          <Link href={`#${EXPERIENCE_SECTION_ID}`}>Experience</Link>
+          <Link href={`#${SKILLS_SECTION_ID}`}>Skills</Link>
+          <Link href={`#${EDUCATION_SECTION_ID}`}>Education</Link>
         </p>
       </SlideRight>
     </Section>

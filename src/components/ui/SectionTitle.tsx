@@ -1,4 +1,4 @@
-import Heading from "@/components/Heading";
+import Heading from "@/components/ui/Heading";
 import SlideRight from "@/components/motion/SlideRight";
 
 export type SectionTitleProps = {
@@ -16,9 +16,7 @@ export default function SectionTitle({
         {firstTitle}
       </Heading>
       {secondTitle ? (
-        <Heading as={"h2"} size="sm" className="text-primary font-normal">
-          {secondTitle}
-        </Heading>
+        <h2 className="prose prose-xl prose-invert">{secondTitle}</h2>
       ) : null}
     </SlideRight>
   );

@@ -1,11 +1,11 @@
 import PostTags from "@/components/blog/PostTags";
-import Card from "@/components/Card";
-import ButtonLink from "@/components/ButtonLink";
-import Heading from "@/components/Heading";
+import Card from "@/components/ui/Card";
+import ButtonLink from "@/components/ui/ButtonLink";
+import Heading from "@/components/ui/Heading";
 import { PropsWithChildren } from "react";
 import { absolutePostUrl, dateToLabel } from "@/utils";
 import { Post } from "@/ts/models/blog/post";
-import AbsoluteLink from "@/components/AbsoluteLink";
+import AbsoluteLink from "@/components/ui/AbsoluteLink";
 
 type PostCardProps = {
   post: Post;

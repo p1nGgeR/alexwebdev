@@ -1,15 +1,14 @@
-import Heading from "@/components/Heading";
+import Heading from "@/components/ui/Heading";
 import { Post } from "@/ts/models/blog/post";
 import Image from "next/image";
 import PostTags from "@/components/blog/PostTags";
 import { cn, dateToLabel } from "@/utils";
-import Markdown from "@/components/Markdown";
+import Markdown from "@/components/ui/Markdown";
 import PostCategory from "@/components/blog/PostCategory";
-import Section from "@/components/Section";
-import Card from "@/components/Card";
-import SlideDown from "@/components/motion/SlideDown";
+import Section from "@/components/ui/Section";
+import Card from "@/components/ui/Card";
 import SlideUp from "@/components/motion/SlideUp";
-import ScrollProgress from "@/components/ScrollProgress";
+import ScrollProgress from "@/components/ui/ScrollProgress";
 
 export default function BlogPost({ post }: { post: Post }) {
   return (
@@ -17,16 +16,14 @@ export default function BlogPost({ post }: { post: Post }) {
       <Section as="article">
         <Card>
           {post.image ? (
-            <SlideDown>
-              <Image
-                src={post.image}
-                alt={post.title}
-                loading={"eager"}
-                width={950}
-                height={400}
-                className="md:h-[400px] object-cover object-center rounded-xl mb-4 md:mb-8"
-              />
-            </SlideDown>
+            <Image
+              src={post.image}
+              alt={post.title}
+              priority={true}
+              width={950}
+              height={400}
+              className="md:h-[400px] object-cover object-center rounded-xl mb-4 md:mb-8"
+            />
           ) : null}
           <SlideUp className={"space-y-4 md:space-y-8"}>
             {post.category ? <PostCategory category={post.category} /> : null}

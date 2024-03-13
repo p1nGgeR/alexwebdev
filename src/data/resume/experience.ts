@@ -22,12 +22,11 @@ export const experience: JobContent[] = [
       "Design back-end and database architecture",
       "Improve application performance and find ways to reduce AWS costs",
       "Configure CI/CD pipelines",
-      "Create technical documentation",
+      "Write technical documentation",
       "Optimize development and release processes",
       "Review pull requests",
       "Mentor junior developers",
       "Conduct technical interviews",
-      "Perform load testing",
     ],
   },
   {

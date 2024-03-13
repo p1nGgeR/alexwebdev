@@ -1,11 +1,13 @@
-import Heading from "@/components/Heading";
+import Heading from "@/components/ui/Heading";
 import { EducationContent } from "@/ts/models/resume/fact";
-import Timeline, { TimelineItem } from "@/components/Timeline";
+import Timeline, { TimelineItem } from "@/components/ui/Timeline";
 import { education } from "@/data/resume";
-import SectionTitle, { SectionTitleProps } from "@/components/SectionTitle";
-import Card from "@/components/Card";
-import Section from "@/components/Section";
+import SectionTitle, { SectionTitleProps } from "@/components/ui/SectionTitle";
+import Card from "@/components/ui/Card";
+import Section from "@/components/ui/Section";
 import SlideUp from "@/components/motion/SlideUp";
+
+export const EDUCATION_SECTION_ID = "education";
 
 export default function Education({
   firstTitle,
@@ -22,7 +24,7 @@ export default function Education({
   });
 
   return (
-    <Section>
+    <Section id={EDUCATION_SECTION_ID}>
       <SectionTitle firstTitle={firstTitle} secondTitle={secondTitle} />
 
       <SlideUp>

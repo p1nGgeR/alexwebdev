@@ -1,9 +1,9 @@
 "use client";
-import Container from "@/components/Container";
+import Container from "@/components/ui/Container";
 import { cn } from "@/utils";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import AbsoluteLink, { AbsoluteLinkProps } from "@/components/AbsoluteLink";
+import AbsoluteLink, { AbsoluteLinkProps } from "@/components/ui/AbsoluteLink";
 import { AUTHOR } from "@/data/resume";
 import { useScroll, useVelocity } from "framer-motion";
 import Bars4Icon from "@/components/icons/Bars4Icon";
@@ -11,9 +11,6 @@ import XMarkIcon from "@/components/icons/XMarkIcon";
 
 const headerNavigationItems: AbsoluteLinkProps[] = [
   { text: "About", href: "/about" },
-  { text: "Experience", href: "/experience" },
-  { text: "Education", href: "/education" },
-  { text: "Skills", href: "/skills" },
   { text: "Blog", href: "/blog" },
 ];
 

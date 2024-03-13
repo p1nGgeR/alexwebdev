@@ -1,4 +1,4 @@
-import Heading from "@/components/Heading";
+import Heading from "@/components/ui/Heading";
 import { PostCategory } from "@/ts/models/blog/post";
 
 export default function PostCategory({ category }: { category: PostCategory }) {

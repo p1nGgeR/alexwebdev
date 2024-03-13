@@ -1,5 +1,5 @@
-import Button, { ButtonProps } from "@/components/Button";
-import AbsoluteLink, { AbsoluteLinkProps } from "@/components/AbsoluteLink";
+import Button, { ButtonProps } from "@/components/ui/Button";
+import AbsoluteLink, { AbsoluteLinkProps } from "@/components/ui/AbsoluteLink";
 
 export type ButtonLinkProps = ButtonProps & AbsoluteLinkProps;
 

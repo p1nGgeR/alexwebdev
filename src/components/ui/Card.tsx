@@ -1,5 +1,5 @@
 import { cn } from "@/utils";
-import { ContainerProps } from "@/components/Container";
+import { ContainerProps } from "@/components/ui/Container";
 
 export type CardProps = ContainerProps & {};
 

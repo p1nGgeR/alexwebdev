@@ -1,4 +1,4 @@
-import Container, { ContainerProps } from "@/components/Container";
+import Container, { ContainerProps } from "@/components/ui/Container";
 import { cn } from "@/utils";
 
 export default function Section({

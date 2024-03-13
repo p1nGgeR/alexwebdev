@@ -1,5 +1,5 @@
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+import Footer from "@/components/ui/Footer";
+import Header from "@/components/ui/Header";
 import { Urbanist } from "next/font/google";
 import { PropsWithChildren } from "react";
 import "./globals.css";
@@ -7,6 +7,7 @@ import { clsx } from "clsx";
 import { Metadata } from "next";
 import { absoluteUrl } from "@/utils";
 import { AUTHOR, JOB_TITLES } from "@/data/resume";
+import ScrollTop from "@/components/ui/ScrollTop";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -20,16 +21,21 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: PropsWithChildren<unknown>) {
   return (
-    <html lang="en">
+    <html lang="en" className={"scroll-smooth"}>
       <body
         className={clsx(
           urbanist.className,
-          "relative min-h-screen w-screen bg-dark main-background-pattern p-4 flex flex-col",
+          "relative",
+          "flex flex-col",
+          "min-h-screen w-screen",
+          "p-4",
+          "bg-dark main-background-pattern",
         )}
       >
         <Header />
         <main className="flex-grow">{children}</main>
         <Footer />
+        <ScrollTop />
       </body>
     </html>
   );
