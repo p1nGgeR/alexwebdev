@@ -4,7 +4,7 @@ import { cn } from "@/utils";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import AbsoluteLink, { AbsoluteLinkProps } from "@/components/ui/AbsoluteLink";
-import { AUTHOR } from "@/data/resume";
+import { AUTHOR_LABEL } from "@/data/resume";
 import { useScroll, useVelocity } from "framer-motion";
 import Bars4Icon from "@/components/icons/Bars4Icon";
 import XMarkIcon from "@/components/icons/XMarkIcon";
@@ -72,10 +72,10 @@ export default function Header() {
         >
           <AbsoluteLink
             href="/"
-            aria-label={`${AUTHOR} - Homepage`}
+            aria-label={`${AUTHOR_LABEL} - Homepage`}
             className="text-xl font-extrabold tracking-tighter text-dark"
           >
-            {AUTHOR}
+            {AUTHOR_LABEL}
           </AbsoluteLink>
           <ul className="hidden md:flex flex-row items-center gap-1 text-base font-bold text-dark">
             {headerNavigationItems.map(({ href, text }, index) => (

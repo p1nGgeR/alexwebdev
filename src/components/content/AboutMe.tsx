@@ -13,7 +13,9 @@ import { EDUCATION_SECTION_ID } from "@/components/content/Education";
 export default function AboutMe() {
   return (
     <Section
-      className={"grid md:grid-cols-[2fr,1fr] gap-8 md:gap-16 space-y-0"}
+      className={
+        "grid md:grid-cols-[2fr,1fr] gap-y-8 md:gap-y-0 md:gap-x-8 space-y-0"
+      }
     >
       <SlideLeft
         className={cn(
@@ -23,11 +25,15 @@ export default function AboutMe() {
       >
         <Image
           src={"/images/me.png"}
-          className={cn("border-2 border-secondary rounded-3xl")}
-          width={400}
-          height={400}
           alt={AUTHOR}
           priority={true}
+          width={400}
+          height={400}
+          className={cn(
+            "bg-center bg-cover",
+            "border-2 border-secondary rounded-3xl",
+          )}
+          style={{ backgroundImage: `url('/images/me-blurred.png')` }}
         />
       </SlideLeft>
 

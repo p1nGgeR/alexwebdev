@@ -1,33 +1,44 @@
 ---
-title: "PHP+Telegram: 5 easy ways how to send a message"
-excerpt: In the world of online communication, Telegram stands out as a popular messaging platform. If you're a developer, it might be useful to know how to easily send a message to Telegram from the code. This article will show you 5 easy ways to do it using PHP.
-published_at: 2023-08-22
-image: '/images/php-telegram-5-easy-ways-how-to-send-a-message-c.png'
-seo_title: "PHP+Telegram: 5 easy ways how to send a message"
-seo_description: It might be useful to know how to easily send a message to Telegram from the code. This article will show you 5 easy ways to do it using PHP.
-h1: "PHP+Telegram: 5 easy ways how to send a message"
+title: 'PHP+Telegram: 5 easy ways to send a message'
+excerpt: >
+    In the world of online communication, Telegram stands out as a popular messaging platform.
+    It might be useful to know how to send a message to Telegram from code.
+    Article shows 5 easy ways to do this using PHP - curl, file_get_contents,
+    Symfony HTTP client, Symfony Telegram Notifier and Telegram Bot SDK.
+published_at: '2023-08-22'
+image: '/images/php-telegram-5-easy-ways-how-to-send-a-message-950-400.png'
+image_blurred: '/images/php-telegram-5-easy-ways-how-to-send-a-message-blurred.png'
+seo_title: 'PHP+Telegram: 5 easy ways to send a message'
+seo_description: >
+    Send a message to Telegram using PHP - curl, file_get_contents, Symfony HTTP client,
+    Symfony Telegram Notifier and Telegram Bot SDK
+h1: 'PHP+Telegram: 5 easy ways to send a message'
 h2: null
-category: php
+category: null # {slug: php, name: php}
 tags:
-  - slug: php
-    name: php
-  - slug: telegram
-    name: telegram
-  - slug: symfony
-    name: symfony
-  - slug: laravel
-    name: laravel
+  - {slug: php, name: php}
+  - {slug: telegram, name: telegram}
+  - {slug: symfony, name: symfony}
+  - {slug: laravel, name: laravel}
 ---
 
-In the world of online communication, Telegram stands out as a popular messaging platform. If you're a developer, it might be useful to know how to easily send a message to Telegram from the code. This article will show you 5 easy ways to do it using PHP.
+In the world of online communication, Telegram stands out as a popular messaging platform.
+It might be useful to know how to easily send a message to Telegram from the code.
+This article shows 5 easy ways to do this using PHP:
+
+* [HTTP request with cURL](#http-request-with-curl)
+* [One line magic with file_get_contents](#one-line-magic-with-file_get_contents)
+* [Symfony HTTP client](#symfony-http-client)
+* [Symfony Telegram Notifier](#symfony-telegram-notifier)
+* [Telegram Bot SDK](#telegram-bot-sdk)
 
 ---
 
-## Preconditions:
+**Preconditions**
 
 - PHP installed and curl extension enabled
 - Public Telegram channel created
-- Telegram bot created using BotFather
+- Telegram bot created with BotFather
 - Bot added to channel administrators
 
 ---
@@ -36,13 +47,15 @@ In the world of online communication, Telegram stands out as a popular messaging
 
 Telegram provides a variety of API endpoints and methods, which can be found in the [documentation](https://core.telegram.org/methods).
 
-Today we're gonna focus on the [sendMessage](https://core.telegram.org/method/messages.sendMessage) endpoint. It sends some text **{TEXT}** to the particular channel **{CHANNEL_ID}** by the bot **{BOT_API_TOKEN}**
+Today we are going to focus on the [sendMessage](https://core.telegram.org/method/messages.sendMessage) endpoint.
+It sends some text **{TEXT}** to the particular channel **{CHANNEL_ID}** by the bot **{BOT_API_TOKEN}**
 
 ```bash
 https://api.telegram.org/bot{BOT_API_TOKEN}/sendMessage?chat_id={CHANNEL_ID}&text={TEXT}
 ```
 
-There are a lot of ways to call this endpoint and send a message to the channel inside a PHP project. We will cover 5 of them.
+There are many ways to call this endpoint and send a message to the channel within a PHP project.
+We will cover 5 of them.
 
 ---
 
@@ -103,7 +116,7 @@ $curl->get($url);
 
 ---
 
-## One line magic using file_get_contents
+## One line magic with file_get_contents
 
 ```php
 <?php
@@ -121,8 +134,10 @@ file_get_contents($url);
 
 ---
 
-## Symfony HTTP client
-[Symfony](https://symfony.com) is one of the most popular PHP frameworks. It provides a lot of different components out of the box and one of them is [HTTP Client](https://symfony.com/doc/current/http_client.html). It allows you to make HTTP requests easily.
+## Symfony HTTP client
+[Symfony](https://symfony.com) is one of the most popular PHP frameworks.
+It provides a lot of different components out of the box, and one of them is [HTTP Client](https://symfony.com/doc/current/http_client.html).
+It allows you to make HTTP requests easily.
 
 ### Installation
 
@@ -155,9 +170,9 @@ $client->request('GET', "/bot{$botApiToken}/sendMessage", [
 ]);
 ```
 
-### Inside Symfony app
+### Inside Symfony app
 
-Prepare scoped client inside **config/packages/framework.yaml**
+Prepare a scoped client in **config/packages/framework.yaml**:
 
 ```yaml
 framework:
@@ -167,7 +182,7 @@ framework:
                 base_uri: 'https://api.telegram.org'
 ```
 
-And use it inside your service
+And use it inside your service:
 
 ```php
 <?php
@@ -201,7 +216,7 @@ class YourService
 
 ---
 
-## Symfony Telegram Notifier
+## Symfony Telegram Notifier
 
 Another Symfony component that can send a message to the Telegram channel is [Telegram Notifier](https://symfony.com/doc/6.1/notifier/telegram.html).
 
@@ -233,9 +248,9 @@ $chatMessage = new ChatMessage($text);
 $chatter->send($chatMessage);
 ```
 
-### Inside Symfony app
+### Inside Symfony app
 
-Configure notifier chatter transport inside **config/packages/framework.yaml**
+Configure a notifier chatter transport in **config/packages/framework.yaml**:
 
 ```yaml
 parameters:
@@ -247,7 +262,7 @@ framework:
             telegram: '%env(TELEGRAM_DSN)%'
 ```
 
-And use it inside your service
+And use it inside your service:
 
 ```php
 <?php
@@ -274,9 +289,10 @@ class YourService
 
 ---
 
-## Telegram Bot SDK
+## Telegram Bot SDK
 
-[Telegram Bot SDK](https://telegram-bot-sdk.com) lets you develop Telegram Bots in PHP easily! Supports Laravel framework and comes with addons to enhance your bot development experience.
+With the [Telegram Bot SDK](https://telegram-bot-sdk.com) you can easily develop Telegram Bots in PHP.
+It supports the Laravel framework and comes with add-ons to enhance your bot development experience.
 
 ### Installation
 
@@ -303,7 +319,7 @@ $telegram->sendMessage([
 ]);
 ```
 
-### Inside Laravel app
+### Inside Laravel app
 
 ```bash
 php artisan vendor:publish --tag="telegram-config"
@@ -332,8 +348,10 @@ class YourService
 }
 ```
 
----
-
 ## Summary
 
-There are many ways to achieve the same goal. With so many options available, there's no definitive "right" way to send a Telegram message using PHP. The choice you make depends on your needs and the technologies you're working with. This article shows five simple ways to send messages to Telegram using PHP, in fact there are many more than five and it's up to you which one to use.
+There are many ways to achieve the same goal.
+With so many options available, there's no definitive "right" way to send a Telegram message using PHP.
+The choice you make depends on your needs and the technologies you're working with.
+This article shows five easy ways to send messages to Telegram using PHP,
+it's up to you which one to use.

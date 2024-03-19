@@ -1,11 +1,10 @@
 import Hero from "@/components/content/Hero";
 import { Metadata } from "next";
-import { AUTHOR, JOB_TITLES } from "@/data/resume";
+import { AUTHOR, AUTHOR_LABEL, JOB_TITLES } from "@/data/resume";
 import { sharedOpenGraph, sharedTwitter } from "@/data/metadata";
-import { absoluteUrl } from "@/utils";
 
-const title = AUTHOR;
-const description = JOB_TITLES.join(" / ");
+const title = AUTHOR_LABEL;
+const description = `${AUTHOR} - ${JOB_TITLES.join(", ")}`;
 
 export const metadata: Metadata = {
   title,

@@ -1,31 +1,39 @@
 ---
-title: "PHP+Slack: 5 easy ways to send a message"
-excerpt: In the world of online communication, Slack stands out as a popular messaging platform. If you're a developer, it might be useful to know how to easily send a message to Slack from the code. This article will show you 5 easy ways to do it using PHP.
-published_at: 2023-08-27
-image: '/images/php-slack-5-easy-ways-to-send-a-message-c.png'
-seo_title: "PHP+Slack: 5 easy ways to send a message"
-seo_description: It might be useful to know how to easily send a message to Slack from the code. This article will show you 5 easy ways to do it using PHP.
-h1: "PHP+Slack: 5 easy ways how to send a message"
+title: 'PHP+Slack: 5 easy ways to send a message'
+excerpt: >
+    Slack has become a popular tool for workplace communication, allowing teams to collaborate easily.
+    It can be useful to learn how to send messages to Slack from code.
+    Article shows 5 easy ways to do this using PHP - curl, Symfony HTTP client,
+    Symfony Slack Notifier, jolicode PHP client for Slack API and Slack Webhook.
+published_at: '2023-08-27'
+image: '/images/php-slack-5-easy-ways-to-send-a-message-950-400.png'
+image_blurred: '/images/php-slack-5-easy-ways-to-send-a-message-blurred.png'
+seo_title: 'PHP+Slack: 5 easy ways to send a message'
+seo_description: >
+    Send a message to Slack using PHP - curl, Symfony HTTP client,
+    Symfony Slack Notifier, jolicode PHP client for Slack API and Slack Webhook
+h1: 'PHP+Slack: 5 easy ways how to send a message'
 h2: null
-category: php
+category: null # {slug: php, name: php}
 tags:
-  - slug: php
-    name: php
-  - slug: slack
-    name: slack
-  - slug: symfony
-    name: symfony
-  - slug: laravel
-    name: laravel
+  - {slug: php, name: php}
+  - {slug: slack, name: slack}
+  - {slug: symfony, name: symfony}
 ---
 
 Slack has become a popular tool for workplace communication, allowing teams to collaborate easily.
-If you're a PHP developer, it can be useful to learn how to send messages to Slack.
-This article will show you 5 easy ways to do so.
+It can be useful to learn how to send messages to Slack from code.
+This article shows 5 easy ways to do this using PHP:
+
+* [HTTP request with cURL](#http-request-with-curl)
+* [Symfony HTTP client](#symfony-http-client)
+* [Symfony Slack Notifier](#symfony-slack-notifier)
+* [jolicode PHP client for Slack API](#jolicode-php-client-for-slack-api)
+* [Slack Webhook](#slack-webhook)
 
 ---
 
-## Preconditions
+**Preconditions**
 
 - PHP installed and curl extension enabled
 - [Slack App with bot token created and added to the channel](https://api.slack.com/start/quickstart)
@@ -37,7 +45,7 @@ This article will show you 5 easy ways to do so.
 
 Slack provides a variety of API endpoints and methods, which can be found in the [documentation](https://api.slack.com/methods).
 
-Today we're gonna focus on the [chat.postMessage](https://api.slack.com/methods/chat.postMessage) endpoint.
+Today we're going to focus on the [chat.postMessage](https://api.slack.com/methods/chat.postMessage) endpoint.
 It sends some text **TEXT** to the particular channel **CHANNEL_NAME** by the bot **BOT_API_TOKEN**
 
 ```
@@ -50,7 +58,7 @@ curl --location 'https://slack.com/api/chat.postMessage' \
 }'
 ```
 
-There are a lot of ways to call this endpoint and send a message to the channel inside a PHP project.
+There are many ways to call this endpoint and send a message to the channel within a PHP project.
 We will cover 4 of them.
 
 ---
@@ -86,7 +94,7 @@ curl_close($curl);
 
 ---
 
-## Symfony HTTP client
+## Symfony HTTP client
 [Symfony](https://symfony.com) is one of the most popular PHP frameworks.
 It provides a lot of different components out of the box and one of them is [HTTP Client](https://symfony.com/doc/current/http_client.html).
 It allows you to make HTTP requests easily.
@@ -126,9 +134,9 @@ $client->request('POST', "/api/chat.postMessage", [
 ]);
 ```
 
-### Inside Symfony app
+### Inside Symfony app
 
-Prepare scoped client inside **config/packages/framework.yaml**.
+Prepare a scoped client in **config/packages/framework.yaml**:
 
 ```yaml
 parameters:
@@ -144,7 +152,7 @@ framework:
                     Accept: 'application/json; charset=utf-8'
 ```
 
-And use it inside your service
+And use it inside your service:
 
 ```php
 <?php
@@ -209,9 +217,9 @@ $chatMessage = new ChatMessage($text);
 $chatter->send($chatMessage);
 ```
 
-### Inside Symfony app
+### Inside Symfony app
 
-Configure notifier chatter transport inside **config/packages/framework.yaml**.
+Configure a notifier chatter transport in **config/packages/framework.yaml**:
 
 ```yaml
 parameters:
@@ -223,7 +231,7 @@ framework:
             slack: '%env(SLACK_DSN)%'
 ```
 
-And use it inside your service
+And use it inside your service:
 
 ```php
 <?php
@@ -250,9 +258,10 @@ class YourService
 
 ---
 
-## jolicode PHP client for Slack's API
+## jolicode PHP client for Slack API
 
-There are other framework agnostic libraries that can help you send a message to the Slack channel. Slack calls them [Community Tools](https://api.slack.com/community).
+There are other framework-independent libraries that can help you send a message to the Slack channel.
+Slack calls them [Community Tools](https://api.slack.com/community).
 
 One of them is [jolicode's PHP client for Slack's API](https://github.com/jolicode/slack-php-api)
 
@@ -276,7 +285,6 @@ $botApiToken = 'xoxb-your-bot-api-token';
 $channelName = 'your channel name';
 $text = 'Hello, I am from Jolicode Client!';
 
-/** @var Client $client */
 $client = ClientFactory::create($botApiToken);
 
 $client->chatPostMessage([
@@ -293,7 +301,8 @@ Another way to send a message to a channel is [Slack Webhook](https://api.slack.
 
 You can create your webhook [here](https://my.slack.com/services/new/incoming-webhook)
 
-After webhook is created, copy **YOUR_WEBHOOK_URL** and make a simple cURL request. It will send **TEXT** to your **CHANNEL_NAME**.
+After webhook is created, copy **YOUR_WEBHOOK_URL** and make a simple cURL request.
+It will send **TEXT** to your **CHANNEL_NAME**.
 
 ```bash
 curl --location 'YOUR_WEBHOOK_URL' \
@@ -312,7 +321,7 @@ In PHP it will look like this
 
 $text = 'Hello, I am from PHP Slack Webhook!';
 $channelName = 'your channel name';
-$url = "your webhook url";
+$url = "YOUR_WEBHOOK_URL";
 
 $curl = curl_init();
 curl_setopt_array($curl, [
@@ -332,12 +341,10 @@ curl_close($curl);
 
 ```
 
----
-
 ## Summary
 
 There are many ways to send a message to a Slack channel.
-It can be done using a Slack App or a Slack Webhook.
+This can be done using a Slack App or a Slack Webhook.
 The choice you make depends on your needs and the technologies you're working with.
-This article shows 5 simple ways to send messages to Slack using PHP,
-in fact there are many more than five and it's up to you which one to use.
+This article shows 5 easy ways to send messages to Slack using PHP,
+it's up to you which one to use.

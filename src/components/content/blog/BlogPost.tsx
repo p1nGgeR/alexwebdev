@@ -22,30 +22,32 @@ export default function BlogPost({ post }: { post: Post }) {
               priority={true}
               width={950}
               height={400}
-              className="md:h-[400px] object-cover object-center rounded-xl mb-4 md:mb-8"
+              className={cn(
+                "md:h-[400px] object-cover object-center rounded-xl mb-4 md:mb-8",
+                "bg-center bg-cover",
+              )}
+              style={{ backgroundImage: `url('${post.image_blurred}')` }}
             />
           ) : null}
-          <SlideUp className={"space-y-4 md:space-y-8"}>
+          <SlideUp
+            className={cn(
+              "prose md:prose-lg prose-invert max-w-none",
+              "prose-a:text-primary hover:prose-a:no-underline",
+            )}
+          >
             {post.category ? <PostCategory category={post.category} /> : null}
 
-            <Heading className="text-primary">{post.title}</Heading>
+            <Heading>{post.title}</Heading>
 
             {Array.isArray(post.tags) ? <PostTags tags={post.tags} /> : null}
 
-            <p className="text-xl font-medium text-primary">
+            <p className="text-xl font-medium">
               {dateToLabel(post.published_at)}
             </p>
 
-            {post.content && (
-              <div
-                className={cn(
-                  "prose md:prose-lg prose-invert max-w-none",
-                  "prose-a:text-primary hover:prose-a:no-underline",
-                )}
-              >
-                <Markdown content={post.content} />
-              </div>
-            )}
+            <hr />
+
+            {post.content && <Markdown content={post.content} />}
           </SlideUp>
         </Card>
       </Section>
