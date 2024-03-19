@@ -2,10 +2,10 @@ import Hero from "@/components/content/Hero";
 import { Metadata } from "next";
 import { AUTHOR, JOB_TITLES } from "@/data/resume";
 import { sharedOpenGraph, sharedTwitter } from "@/data/metadata";
-import { absoluteUrl } from "@/utils";
+import { formatSeoTitle } from "@/utils";
 
-const title = AUTHOR;
-const description = JOB_TITLES.join(" / ");
+const title = formatSeoTitle(AUTHOR);
+const description = `${AUTHOR} - ${JOB_TITLES.join(", ")}`;
 
 export const metadata: Metadata = {
   title,

@@ -6,25 +6,25 @@ import Experience from "@/components/content/Experience";
 import Education from "@/components/content/Education";
 import Skills from "@/components/content/Skills";
 import ScrollProgress from "@/components/ui/ScrollProgress";
+import { AUTHOR } from "@/data/resume";
 
-const title = "About me";
-const formattedTitle = formatSeoTitle(title);
+const title = formatSeoTitle(`About ${AUTHOR}`);
 const description =
   "I've been working as a full-stack web developer since 2016. " +
   "My main speciality is back-end development and I have a lot of front-end experience as well";
 
 export const metadata: Metadata = {
-  title: formattedTitle,
+  title,
   description,
   openGraph: {
     ...sharedOpenGraph,
     url: absoluteUrl("/about"),
-    title: formattedTitle,
+    title,
     description,
   },
   twitter: {
     ...sharedTwitter,
-    title: formattedTitle,
+    title,
     description,
   },
 };

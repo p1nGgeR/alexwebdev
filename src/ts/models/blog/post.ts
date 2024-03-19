@@ -12,6 +12,7 @@ export type Post = {
   excerpt: string;
   content: string;
   image: string;
+  image_blurred: string;
   seo_title?: string;
   seo_description?: string;
   h1?: string;

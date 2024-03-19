@@ -1,7 +1,7 @@
 import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { Post } from "@/ts/models/blog/post";
-import { AUTHOR } from "@/data/resume";
+import { AUTHOR_LABEL } from "@/data/resume";
 
 export const DOMAIN =
   process.env.NEXT_PUBLIC_DOMAIN || process.env.VERCEL_URL || "localhost:3000";
@@ -43,5 +43,5 @@ export function dateToIso(dateString: string): string {
 
 // SEO
 export function formatSeoTitle(title: string): string {
-  return `${title} - ${AUTHOR}`;
+  return `${title} - ${AUTHOR_LABEL}`;
 }

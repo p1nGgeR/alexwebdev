@@ -4,7 +4,7 @@ import { cn } from "@/utils";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import AbsoluteLink, { AbsoluteLinkProps } from "@/components/ui/AbsoluteLink";
-import { AUTHOR } from "@/data/resume";
+import { AUTHOR_LABEL } from "@/data/resume";
 import { useScroll, useVelocity } from "framer-motion";
 import Bars4Icon from "@/components/icons/Bars4Icon";
 import XMarkIcon from "@/components/icons/XMarkIcon";
@@ -66,16 +66,16 @@ export default function Header() {
           className={cn(
             "flex justify-between items-center",
             "bg-primary",
-            "p-2 md:p-4",
+            "p-4",
             "rounded-lg md:rounded-xl",
           )}
         >
           <AbsoluteLink
             href="/"
-            aria-label={`${AUTHOR} - Homepage`}
+            aria-label={`${AUTHOR_LABEL} - Homepage`}
             className="text-xl font-extrabold tracking-tighter text-dark"
           >
-            {AUTHOR}
+            {AUTHOR_LABEL}
           </AbsoluteLink>
           <ul className="hidden md:flex flex-row items-center gap-1 text-base font-bold text-dark">
             {headerNavigationItems.map(({ href, text }, index) => (
@@ -105,7 +105,7 @@ export default function Header() {
           <button
             aria-expanded={sidebarOpen}
             aria-label="Show sidebar"
-            className="p-2 text-2xl md:hidden"
+            className="text-2xl md:hidden"
             onClick={() => setSidebarOpen(true)}
           >
             <Bars4Icon />

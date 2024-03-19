@@ -1,10 +1,7 @@
 import Section from "@/components/ui/Section";
-import Image from "next/image";
 import { cn } from "@/utils";
 import Heading from "@/components/ui/Heading";
 import SlideRight from "@/components/motion/SlideRight";
-import { AUTHOR } from "@/data/resume";
-import SlideLeft from "@/components/motion/SlideLeft";
 import Link from "next/link";
 import { EXPERIENCE_SECTION_ID } from "@/components/content/Experience";
 import { SKILLS_SECTION_ID } from "@/components/content/Skills";
@@ -12,32 +9,14 @@ import { EDUCATION_SECTION_ID } from "@/components/content/Education";
 
 export default function AboutMe() {
   return (
-    <Section
-      className={"grid md:grid-cols-[2fr,1fr] gap-8 md:gap-16 space-y-0"}
-    >
-      <SlideLeft
-        className={cn(
-          "row-start-1 md:col-start-2 md:row-end-3 max-w-sm",
-          "aspect-square overflow-hidden",
-        )}
-      >
-        <Image
-          src={"/images/me.png"}
-          className={cn("border-2 border-secondary rounded-3xl")}
-          width={400}
-          height={400}
-          alt={AUTHOR}
-          priority={true}
-        />
-      </SlideLeft>
-
+    <Section className={"space-y-0"}>
       <SlideRight
         className={cn(
           "prose prose-xl prose-invert",
           "prose-a:text-accent prose-a:inline-block hover:prose-a:no-underline",
         )}
       >
-        <Heading size="xl" className="text-accent">
+        <Heading size="xl" className="text-accent mb-8 md:mb-16">
           About me
         </Heading>
 
@@ -66,7 +45,7 @@ export default function AboutMe() {
           contribute to innovative and impactful projects.
         </p>
 
-        <p className={"space-x-4"}>
+        <p className={"space-x-4 mt-8 md:mt-16"}>
           <Link href={`#${EXPERIENCE_SECTION_ID}`}>Experience</Link>
           <Link href={`#${SKILLS_SECTION_ID}`}>Skills</Link>
           <Link href={`#${EDUCATION_SECTION_ID}`}>Education</Link>
