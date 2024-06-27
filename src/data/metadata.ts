@@ -6,12 +6,12 @@ export const sharedOpenGraph = {
   siteName: DOMAIN,
   images: [
     {
-      url: absoluteUrl("/images/me.png"),
+      url: absoluteUrl("/images/alexwebdev.png"),
     },
   ],
 };
 
 export const sharedTwitter = {
   card: "summary",
-  images: [absoluteUrl("/images/me.png")],
+  images: [absoluteUrl("/images/alexwebdev.png")],
 };
